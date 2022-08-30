@@ -1,6 +1,9 @@
 import React from "react";
 
 function App() {
+
+  const [tarea, setTarea] = React.useState("")//Sera string porque lo vincularemos con el input del form quer ecibira tarea
+
   return (
     <div className="container mt-5">
   <h1 className="text-center">CRUD APP</h1>
@@ -24,7 +27,7 @@ function App() {
       Formulario
       </h4>
       <form>
-        <input type="text" className="form-control mb-2" placeholder="Ingrese tarea"/>
+        <input type="text" className="form-control mb-2" onChange={e => setTarea(e.target.value)} placeholder="Ingrese tarea"/>
         <button className="btn btn-dark btn-block" type="submit">Agregar</button>
       </form>
     </div>

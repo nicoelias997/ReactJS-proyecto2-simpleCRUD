@@ -23,6 +23,10 @@ function App() {
       <h4 className="text-center">
       Formulario
       </h4>
+      <form>
+        <input type="text" className="form-control mb-2" placeholder="Ingrese tarea"/>
+        <button className="btn btn-dark btn-block" type="submit">Agregar</button>
+      </form>
     </div>
   </div>
  

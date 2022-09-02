@@ -19,6 +19,11 @@ function App() {
   setTarea("")
 }
 
+const eliminarTarea = id => {//hay que recorrer el array
+  const arrayFiltrado = tareas.filter(item => item.id !== id )//filtramos las tareas que no compartan id
+  setTareas(arrayFiltrado) //no hace falta poner corchetes ya que arrayFiltrado ya es un array.
+}
+
 
   return (
     <div className="container mt-5">
@@ -34,8 +39,15 @@ function App() {
             tareas.map(item => (
               <li className="list-group-item" key={item.id}>
               <span className="lead">{item.nombreTarea}</span>
-              <button className="btn btn-danger btn-sm float-end mx-2">Eliminar</button>
-              <button className="btn btn-warning btn-sm float-end">Editar</button>
+              <button 
+              className="btn btn-danger btn-sm float-end mx-2"
+              onClick={()=> eliminarTarea(item.id)}>
+                Eliminar
+                </button>
+              <button 
+              className="btn btn-warning btn-sm float-end">
+                Editar
+                </button>
             </li>
             ))
         }

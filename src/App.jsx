@@ -12,9 +12,11 @@ function App() {
     console.log('Campo vacio')
     return
   }
-  setTarea([
+  setTareas([
+    ...tareas,
     {id: shortid.generate(), nombreTarea: tarea}
   ])
+  setTarea("")
 }
 
 
@@ -28,12 +30,15 @@ function App() {
       Lista de Tareas
       </h4>
       <ul className="list-group">
-        <li className="list-group-item">
-          <span className="lead">Nombre de la tarea</span>
-          <button className="btn btn-danger btn-sm float-end mx-2">Eliminar</button>
-          <button className="btn btn-warning btn-sm float-end">Editar</button>
-
-        </li>
+        {
+            tareas.map(item => (
+              <li className="list-group-item" key={item.id}>
+              <span className="lead">{item.nombreTarea}</span>
+              <button className="btn btn-danger btn-sm float-end mx-2">Eliminar</button>
+              <button className="btn btn-warning btn-sm float-end">Editar</button>
+            </li>
+            ))
+        }
       </ul>
     </div>
     <div className="col-4">

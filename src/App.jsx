@@ -5,6 +5,7 @@ function App() {
 
   const [tarea, setTarea] = React.useState("")//Sera string porque lo vincularemos con el input del form quer ecibira tarea
   const [tareas, setTareas] = React.useState([])
+  const [modoEdicion, setModoEdicion] = React.useState(false)
 
  const agregarTarea = e => {
   e.preventDefault()
@@ -24,6 +25,10 @@ const eliminarTarea = id => {//hay que recorrer el array
   setTareas(arrayFiltrado) //no hace falta poner corchetes ya que arrayFiltrado ya es un array.
 }
 
+const editarTarea = item => {
+  setModoEdicion(true)
+
+}
 
   return (
     <div className="container mt-5">
@@ -45,7 +50,8 @@ const eliminarTarea = id => {//hay que recorrer el array
                 Eliminar
                 </button>
               <button 
-              className="btn btn-warning btn-sm float-end">
+              className="btn btn-warning btn-sm float-end"
+              onClick={()=> editarTarea(item)}>
                 Editar
                 </button>
             </li>
@@ -55,7 +61,9 @@ const eliminarTarea = id => {//hay que recorrer el array
     </div>
     <div className="col-4">
       <h4 className="text-center">
-      Formulario
+        {
+          modoEdicion ? 'Editar tarea' : 'Agregar tarea' //cuando es true, editamos tarea, cuando estemos en falso, estamos en agregar tarea, para eso usamos los setMod!! 
+        }
       </h4>
       <form onSubmit={agregarTarea}>
         <input 
@@ -64,7 +72,14 @@ const eliminarTarea = id => {//hay que recorrer el array
         onChange={e => setTarea(e.target.value)} 
         placeholder="Ingrese tarea"
         value={tarea}/>
-        <button className="btn btn-dark btn-block" type="submit">Agregar</button>
+        {
+          modoEdicion ? (
+          <button className="btn btn-warning btn-block col-12" type="submit">Editar</button>
+          ) //verdadero modoEdicion
+          :
+          (<button className="btn btn-dark btn-block col-12" type="submit">Agregar</button>) //falso modoEdicion
+        } 
+        
       </form>
     </div>
   </div>

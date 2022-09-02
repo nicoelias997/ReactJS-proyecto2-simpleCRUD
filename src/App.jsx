@@ -6,6 +6,7 @@ function App() {
   const [tarea, setTarea] = React.useState("")//Sera string porque lo vincularemos con el input del form quer ecibira tarea
   const [tareas, setTareas] = React.useState([])
   const [modoEdicion, setModoEdicion] = React.useState(false)
+  const [id, setId] = React.useState("")
 
  const agregarTarea = e => {
   e.preventDefault()
@@ -25,9 +26,23 @@ const eliminarTarea = id => {//hay que recorrer el array
   setTareas(arrayFiltrado) //no hace falta poner corchetes ya que arrayFiltrado ya es un array.
 }
 
-const editarTarea = item => {
+const editarFormulario = item => {
   setModoEdicion(true)
   setTarea(item.nombreTarea) //Hara que cuando apretemos editar, se pasara el texto al input de editarTarea
+  setId(item.id)
+}
+
+const editarTarea = e => {
+  e.preventDefault()
+  if(!tarea.trim()){
+    console.log('Campo vacio')
+    return
+  }
+  const arrayEditado = tareas.map(item => item.id === id ? {id, nombreTarea: tarea} : item)
+  setTareas(arrayEditado)
+  setModoEdicion(false)
+  setTarea("") 
+  setId("")
 }
 
   return (
@@ -51,7 +66,7 @@ const editarTarea = item => {
                 </button>
               <button 
               className="btn btn-warning btn-sm float-end"
-              onClick={()=> editarTarea(item)}>
+              onClick={()=> editarFormulario(item)}>
                 Editar
                 </button>
             </li>
@@ -65,7 +80,7 @@ const editarTarea = item => {
           modoEdicion ? 'Editar tarea' : 'Agregar tarea' //cuando es true, editamos tarea, cuando estemos en falso, estamos en agregar tarea, para eso usamos los setMod!! 
         }
       </h4>
-      <form onSubmit={agregarTarea}>
+      <form onSubmit={modoEdicion ? editarTarea : agregarTarea}>
         <input 
         type="text" 
         className="form-control mb-2" 

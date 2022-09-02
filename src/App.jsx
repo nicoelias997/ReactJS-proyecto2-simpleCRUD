@@ -1,8 +1,10 @@
 import React from "react";
+import shortid from "shortid";
 
 function App() {
 
   const [tarea, setTarea] = React.useState("")//Sera string porque lo vincularemos con el input del form quer ecibira tarea
+  const [tareas, setTareas] = React.useState([])
 
  const agregarTarea = e => {
   e.preventDefault()
@@ -10,8 +12,9 @@ function App() {
     console.log('Campo vacio')
     return
   }
-  console.log(tarea)
-  setTarea("")
+  setTarea([
+    {id: shortid.generate(), nombreTarea: tarea}
+  ])
 }
 
 

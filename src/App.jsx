@@ -27,7 +27,7 @@ const eliminarTarea = id => {//hay que recorrer el array
 
 const editarTarea = item => {
   setModoEdicion(true)
-
+  setTarea(item.nombreTarea) //Hara que cuando apretemos editar, se pasara el texto al input de editarTarea
 }
 
   return (

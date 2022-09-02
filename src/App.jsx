@@ -4,6 +4,17 @@ function App() {
 
   const [tarea, setTarea] = React.useState("")//Sera string porque lo vincularemos con el input del form quer ecibira tarea
 
+ const agregarTarea = e => {
+  e.preventDefault()
+  if(!tarea.trim()){
+    console.log('Campo vacio')
+    return
+  }
+  console.log(tarea)
+  setTarea("")
+}
+
+
   return (
     <div className="container mt-5">
   <h1 className="text-center">CRUD APP</h1>
@@ -26,8 +37,13 @@ function App() {
       <h4 className="text-center">
       Formulario
       </h4>
-      <form>
-        <input type="text" className="form-control mb-2" onChange={e => setTarea(e.target.value)} placeholder="Ingrese tarea"/>
+      <form onSubmit={agregarTarea}>
+        <input 
+        type="text" 
+        className="form-control mb-2" 
+        onChange={e => setTarea(e.target.value)} 
+        placeholder="Ingrese tarea"
+        value={tarea}/>
         <button className="btn btn-dark btn-block" type="submit">Agregar</button>
       </form>
     </div>

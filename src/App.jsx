@@ -56,7 +56,11 @@ const editarTarea = e => {
       </h4>
       <ul className="list-group">
         {
-            tareas.map(item => (
+          //Agregamos validaciones para cuando no hayan tareas
+          tareas.length === 0 ? (
+            <li className="list-group-item">No hay tareas</li>
+          ) : (
+              tareas.map(item => (
               <li className="list-group-item" key={item.id}>
               <span className="lead">{item.nombreTarea}</span>
               <button 
@@ -71,6 +75,7 @@ const editarTarea = e => {
                 </button>
             </li>
             ))
+          )           
         }
       </ul>
     </div>
